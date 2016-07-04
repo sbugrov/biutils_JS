@@ -45,20 +45,3 @@ function DeBruijn(k, dna) {
 var a = DeBruijn(number, text);
 
 myHeading.innerHTML = a;
-
-// |,AA,AAT,AT,|,
-// |,AT,ATG,GG,|,
-// |,AT,ATG,GG,|,
-// |,AT,ATG,TG,|,
-// |,CA,CAT,AT,|,
-// |,CC,CCA,AA,|,
-// |,GA,GAT,AT,|,
-// |,GC,GCC,CC,|,
-// |,GG,GGA,AA,|,
-// |,GG,GGG,GG,|,
-// |,GT,GTT,AT,|,
-// |,TA,TAA,AA,|,
-// |,TG,TGT,AT,|,
-// |,TG,TGC,CC,|,
-// |,TG,TGG,GG,|
-

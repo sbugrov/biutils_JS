@@ -3,6 +3,35 @@ var myHeading = document.getElementById("demo");
 var text = 'TAATGCCATGGGATGTT';
 var number = 3;
 
+function cyclic_spectrum(peptide){
+  //   Generate the theoretical spectrum of a cyclic peptide.
+  //   Input: An amino acid string Peptide.
+  //   Output: Cyclospectrum(Peptide).
+  var amino_acid_mass = { 'G' : 57,  'A' : 71,  'S' : 87,  'P' : 97, 'V' : 99,  'T' : 101, 'C' : 103, 'I' : 113, 'L' : 113, 'N' : 114,
+                      'D' : 115, 'K' : 128, 'Q' : 128, 'E' : 129,'M' : 131, 'H' : 137, 'F' : 147, 'R' : 156, 'Y' : 163, 'W' : 186};
+  var prefix_mass = [0];
+  var peptide_length = peptide.length;
+  
+  for (i = 1; i <= peptide_length; i++){
+    prefix_mass.push(prefix_mass[i-1] + amino_acid_mass[peptide[i-1]]);
+  }
+  
+  var total_peptide_mass = prefix_mass[peptide_length];
+  
+  for (i = 1; i <= peptide_length; i++){
+    for (j = i + 1; j <= peptide.length; j++){
+      prefix_mass.push(prefix_mass[j] - prefix_mass[i]);
+      if (i > 0 && j < peptide_length){
+        prefix_mass.push(total_peptide_mass - (prefix_mass[j] - prefix_mass[i]));
+      }
+    }
+  }
+  
+  prefix_mass.sort(function(a, b) { return a - b; });
+  
+  return prefix_mass;
+}
+
 function rna_to_aa(rna){
   /*Translate an RNA string into an amino acid string.
     Input: An RNA string Pattern.
